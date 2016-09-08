@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">my12306</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login_register">LoginRegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+</resources>
