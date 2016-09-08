@@ -1,14 +1,8 @@
-package com.suk.yuzhiyun.my12306.view;
+package com.suk.yuzhiyun.my12306.loginAndRegister.view;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
-import com.suk.yuzhiyun.my12306.view.base.BaseActivity;
+import com.suk.yuzhiyun.my12306.base.BaseActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +25,6 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
-
-    RequestQueue requestQueue = null;
 
     @Bind(R.id.tvSeverMsg)
     TextView tvSeverMsg;
@@ -53,7 +46,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initOther() {
 
-        requestQueue = Volley.newRequestQueue(LoginActivity.this);
+
     }
 
     /**
@@ -77,7 +70,7 @@ public class LoginActivity extends BaseActivity {
                     public void onResponse(String s) {
                         Log.i("onResponse", s);
                         Toast.makeText(LoginActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
-                        tvSeverMsg.setText("成功");
+                        tvSeverMsg.setText(s);
                     }
                 },
                 new Response.ErrorListener() {
@@ -97,6 +90,7 @@ public class LoginActivity extends BaseActivity {
                 return map;
             }
         };
-        requestQueue.add(request);
+
+      App.getRequestQueue(context).add(request);
     }
 }

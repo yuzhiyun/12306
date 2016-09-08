@@ -1,8 +1,7 @@
-package com.suk.yuzhiyun.my12306.view.base;
+package com.suk.yuzhiyun.my12306.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.suk.yuzhiyun.my12306.R;

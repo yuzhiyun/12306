@@ -9,9 +9,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.suk.yuzhiyun.my12306.view.LoginActivity"
+    tools:context=".loginAndRegister.view.LoginActivity"
     tools:showIn="@layout/activity_login">
     <android.support.v7.widget.AppCompatEditText
+        android:text="maxiaolong"
         android:id="@+id/etUserName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,6 +20,7 @@
         android:gravity="center_vertical"/>
 
     <android.support.v7.widget.AppCompatEditText
+        android:text="123456"
         android:id="@+id/etUserPwd"
         android:layout_below="@+id/etUserName"
         android:layout_width="match_parent"

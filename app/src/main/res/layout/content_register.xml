@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:scrollbars="none"
+    android:layout_marginTop="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,7 +17,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.suk.yuzhiyun.my12306.view.RegisterActivity"
+    tools:context=".loginAndRegister.view.RegisterActivity"
     tools:showIn="@layout/activity_register">
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/etUserName"
@@ -31,9 +39,40 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="确认密码" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etRealName"
+        android:layout_below="@+id/etUserPwdAgain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="真实姓名" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etSex"
+        android:layout_below="@+id/etRealName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="性别" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etCardId"
+        android:layout_below="@+id/etSex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="身份证号" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etPhone"
+        android:layout_below="@+id/etCardId"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="手机" />
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etType"
+        android:layout_below="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="乘客类型" />
     <Button
         android:id="@+id/btnRegister"
-        android:layout_below="@+id/etUserPwdAgain"
+        android:layout_below="@+id/etType"
         android:layout_width="match_parent"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
@@ -42,6 +81,14 @@
         android:textSize="@dimen/activity_horizontal_margin"
         android:textColor="@android:color/white"
         android:layout_height="40dp" />
+
+    <TextView
+        android:id="@+id/tvSeverMsg"
+        android:layout_width="match_parent"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btnRegister"
+        />
     <TextView
         android:id="@+id/tvLogin"
         android:layout_marginTop="50dp"
@@ -52,3 +99,4 @@
         android:textSize="20dp"
         android:gravity="center"/>
 </RelativeLayout>
+</ScrollView>
