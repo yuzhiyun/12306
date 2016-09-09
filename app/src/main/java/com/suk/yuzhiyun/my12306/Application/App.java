@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley;
  */
 public class App extends Application {
 
+    //谔谔
     public static RequestQueue requestQueue = null;
 
     //    static App app=null;
