@@ -17,6 +17,10 @@ import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,23 +68,48 @@ public class RegisterActivity extends BaseActivity {
     protected void initOther() {
 
     }
+
     /**
      * 跳转到登录
-     * */
+     */
     @OnClick(R.id.tvLogin)
-    public void login(){
-        startActivity(new Intent(context,LoginActivity.class));
+    public void login() {
+        startActivity(new Intent(context, LoginActivity.class));
     }
+
     /**
      * 注册
-     * */
+     */
     @OnClick(R.id.btnRegister)
-    public void Register(){
+    public void Register() {
         //判断两次输入密码一致性
-        if(etUserPwd.getText().toString().trim().equals(etUserPwdAgain.getText().toString().trim()))
+        if (etUserPwd.getText().toString().trim().equals(etUserPwdAgain.getText().toString().trim()))
             tvSeverMsg.setText("两次输入密码不一致");
 
         StringRequestPost(url);
+
+        Log.i("json", json());
+    }
+
+    /**
+     * 测试json的使用
+     *
+     * @return
+     *  {"register":[{"pwd":"12345","name":"俞志云"}]}
+     */
+    public String json() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONArray array = new JSONArray();
+            JSONObject data = new JSONObject();
+            data.put("name", "俞志云");
+            data.put("pwd", "12345");
+            array.put(data);
+            jsonObject.put("register", array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
     }
 
     private void StringRequestPost(String url) {
