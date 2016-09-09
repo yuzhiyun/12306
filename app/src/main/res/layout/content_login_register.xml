@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_login_register"
-    android:background="@color/back">
+    android:background="@color/colorPrimary">
     <ImageView
         android:layout_marginTop="64dp"
         android:id="@+id/image"

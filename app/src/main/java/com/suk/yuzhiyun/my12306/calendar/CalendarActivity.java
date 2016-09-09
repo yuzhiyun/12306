@@ -10,7 +10,7 @@ import com.suk.yuzhiyun.my12306.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-
+import android.support.v7.widget.Toolbar;
 public class CalendarActivity extends BaseActivity {
 
     @Bind(R.id.myCalendar)
@@ -34,6 +34,8 @@ public class CalendarActivity extends BaseActivity {
 
     @Override
     protected void initOther() {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         year=DateUtil.getYear();
         month=DateUtil.getMonth();
         tvTime.setText(year + "--" + month);

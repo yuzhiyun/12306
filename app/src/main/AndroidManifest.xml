@@ -34,6 +34,7 @@
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:parentActivityName=".reserve.MainActivity"
             android:name=".calendar.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar"></activity>
