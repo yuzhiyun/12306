@@ -1,5 +1,6 @@
 package com.suk.yuzhiyun.my12306.loginAndRegister.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
@@ -62,12 +63,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void StringRequestPost(String url) {
+        //        进度对话框
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("正在连接...");
+        progressDialog.show();
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        progressDialog.dismiss();
                         Log.i("onResponse", s);
                         Toast.makeText(LoginActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
                         tvSeverMsg.setText(s);
@@ -76,6 +82,7 @@ public class LoginActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        progressDialog.dismiss();
                         Log.e("onErrorResponse", volleyError.toString());
                         Toast.makeText(LoginActivity.this, "错误" + volleyError.toString(), Toast.LENGTH_SHORT).show();
                         tvSeverMsg.setText(volleyError.toString());
