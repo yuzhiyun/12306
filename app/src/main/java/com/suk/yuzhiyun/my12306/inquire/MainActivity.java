@@ -3,6 +3,8 @@ package com.suk.yuzhiyun.my12306.inquire;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
@@ -11,11 +13,12 @@ import com.suk.yuzhiyun.my12306.base.BaseActivity;
 import com.suk.yuzhiyun.my12306.calendar.CalendarActivity;
 import com.suk.yuzhiyun.my12306.calendar.DateUtil;
 import com.suk.yuzhiyun.my12306.inquire.viewpager.Adapter;
+import com.suk.yuzhiyun.my12306.inquire.viewpager.ViewPagerFragment;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
 
 
     @Bind(R.id.vPager)
@@ -31,6 +34,21 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.tvStartHour)
     TextView tvStartHour;
+    /**
+     * 处理viewpager自动轮播
+     */
+    int currentItem = 0;
+    int AUTO_MESSAGE=1;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //设置当前item
+            vPager.setCurrentItem((currentItem++) % ViewPagerFragment.picture.length, true);
+//            继续轮播
+            handler.sendEmptyMessageDelayed(AUTO_MESSAGE, 2000);
+        }
+    };
 
     @Override
     protected void setLayoutView() {
@@ -44,6 +62,11 @@ public class MainActivity extends BaseActivity {
         day = DateUtil.getCurrentMonthDay();
         tvStartTime.setText(year + " - " + month + " - " + day);
         initViewPager();
+
+        //viewpager开始轮播
+        handler.sendEmptyMessageDelayed(AUTO_MESSAGE,1000);
+
+
     }
 
     private void initViewPager() {
@@ -88,6 +111,26 @@ public class MainActivity extends BaseActivity {
                 tvStartTime.setText(year + " - " + month + " - " + day);
             }
 
+
+    }
+
+    /**
+     * 以下三个方法是继承接口ViewPager.OnPageChangeListener后
+     * 需要实现的方法
+     *
+     * */
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
     }
 }
