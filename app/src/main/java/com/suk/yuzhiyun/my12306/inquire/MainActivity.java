@@ -1,25 +1,25 @@
-package com.suk.yuzhiyun.my12306.reserve;
+package com.suk.yuzhiyun.my12306.inquire;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
 import com.suk.yuzhiyun.my12306.calendar.CalendarActivity;
 import com.suk.yuzhiyun.my12306.calendar.DateUtil;
+import com.suk.yuzhiyun.my12306.inquire.viewpager.Adapter;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
+
+    @Bind(R.id.vPager)
+    ViewPager vPager;
 
     int year;
     int month;
@@ -28,6 +28,7 @@ public class MainActivity extends BaseActivity {
     private static final int REQUEST_CODE = 1;
     @Bind(R.id.tvStartTime)
     TextView tvStartTime;
+
     @Bind(R.id.tvStartHour)
     TextView tvStartHour;
 
@@ -42,6 +43,11 @@ public class MainActivity extends BaseActivity {
         month = DateUtil.getMonth();
         day = DateUtil.getCurrentMonthDay();
         tvStartTime.setText(year + " - " + month + " - " + day);
+        initViewPager();
+    }
+
+    private void initViewPager() {
+        vPager.setAdapter(new Adapter(getSupportFragmentManager()));
     }
 
     @OnClick(R.id.tvStartTime)

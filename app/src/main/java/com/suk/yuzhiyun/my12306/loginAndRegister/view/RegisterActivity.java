@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
 
-    String url = "http://192.168.1.110:8080/register.user";
+    String url = "http://192.168.0.115:8080/register.user";
     //用户名
     @Bind(R.id.etUserName)
     AppCompatEditText etUserName;
@@ -45,12 +45,20 @@ public class RegisterActivity extends BaseActivity {
     //真实姓名
     @Bind(R.id.etRealName)
     AppCompatEditText etRealName;
+     //性别
+    @Bind(R.id.etSex)
+    AppCompatEditText etSex;
     //身份证号
     @Bind(R.id.etCardId)
     AppCompatEditText etCardId;
     //手机
     @Bind(R.id.etPhone)
     AppCompatEditText etPhone;
+   //乘客类型
+    @Bind(R.id.etType)
+    AppCompatEditText etType;
+
+
     //注册
     @Bind(R.id.btnRegister)
     Button btnRegister;
@@ -195,12 +203,12 @@ public class RegisterActivity extends BaseActivity {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("username", etUserName.getText().toString().trim());
                 map.put("password", etUserPwd.getText().toString().trim());
-                map.put("name", etUserPwd.getText().toString().trim());
-                map.put("sex", etUserPwd.getText().toString().trim());
-                map.put("idnumber", etUserPwd.getText().toString().trim());
-                map.put("tel", etUserPwd.getText().toString().trim());
+                map.put("name", etRealName.getText().toString().trim());
+                map.put("sex", etSex.getText().toString().trim());
+                map.put("idnumber", etCardId.getText().toString().trim());
+                map.put("tel", etPhone.getText().toString().trim());
                 //0-成人，1-学生，2-儿童，3-伤残军人
-                map.put("type", etUserPwd.getText().toString().trim());
+                map.put("type", etType.getText().toString().trim());
                 return map;
             }
         };

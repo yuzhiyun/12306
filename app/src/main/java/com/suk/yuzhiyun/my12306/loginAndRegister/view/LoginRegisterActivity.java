@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.suk.yuzhiyun.my12306.reserve.MainActivity;
+import com.suk.yuzhiyun.my12306.inquire.MainActivity;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
 
