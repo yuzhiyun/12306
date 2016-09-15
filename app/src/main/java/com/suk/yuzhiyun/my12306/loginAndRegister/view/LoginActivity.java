@@ -17,6 +17,10 @@ import com.android.volley.toolbox.Volley;
 import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
+import com.suk.yuzhiyun.my12306.inquire.MainActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +41,7 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.etUserPwd)
     AppCompatEditText etUserPwd;
 
-    String url = "http://192.168.1.110:8080/login.user";
+    String url = "http://"+App.ip+":8080/login.user";
 
     @Override
     protected void setLayoutView() {
@@ -57,9 +61,10 @@ public class LoginActivity extends BaseActivity {
     public void login() {
         StringRequestPost(url);
     }
+
     @OnClick(R.id.tvRegister)
     public void Register() {
-       startActivity(new Intent(context,RegisterActivity.class));
+        startActivity(new Intent(context, RegisterActivity.class));
     }
 
     private void StringRequestPost(String url) {
@@ -71,21 +76,27 @@ public class LoginActivity extends BaseActivity {
                 Request.Method.POST,
                 url,
                 new Response.Listener<String>() {
-                    @Override
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Log.i("onResponse", s);
-                        Toast.makeText(LoginActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
-                        tvSeverMsg.setText(s);
+
+                        try {
+                            String result = new JSONObject(s).getString("flag");
+                            if ("success".equals(result)) {
+                                startActivity(new Intent(context, MainActivity.class));
+                            } else {
+                                tvSeverMsg.setText("用户名或密码错误");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         progressDialog.dismiss();
-                        Log.e("onErrorResponse", volleyError.toString());
-                        Toast.makeText(LoginActivity.this, "错误" + volleyError.toString(), Toast.LENGTH_SHORT).show();
-                        tvSeverMsg.setText(volleyError.toString());
+                        tvSeverMsg.setText("连接不到服务器");
                     }
                 }) {
             @Override
@@ -98,6 +109,6 @@ public class LoginActivity extends BaseActivity {
             }
         };
 
-      App.getRequestQueue(context).add(request);
+        App.getRequestQueue(context).add(request);
     }
 }
