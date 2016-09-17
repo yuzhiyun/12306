@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".inquire.MainActivity"
+    tools:context=".main.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <RelativeLayout
@@ -44,11 +43,11 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="30dp">
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +70,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="@dimen/text" />
+                        android:text="长沙"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/big_text" />
 
                     <ImageView
                         android:layout_width="0dp"
@@ -86,10 +87,18 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="@dimen/text" />
+                        android:text="北京"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/big_text" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearStart"
@@ -101,25 +110,31 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
                         android:text="出发日期 "
                         android:textSize="@dimen/text" />
 
                     <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:id="@+id/tvStartTime"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Hello World!"
+                        android:text="2016-2-2"
                         android:textSize="@dimen/text" />
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray">
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearStartHour"
@@ -131,20 +146,21 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="席别 "
+                        android:text="席  别 "
                         android:textSize="@dimen/text" />
 
                     <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:id="@+id/tvSeat"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:text="硬座"
                         android:textSize="@dimen/text" />
 
                 </LinearLayout>
@@ -159,7 +175,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@drawable/edittext_colorprimary"
-            android:text="查询"
+            android:text="查    询"
             android:textColor="@android:color/white"></Button>
 
         <TextView
