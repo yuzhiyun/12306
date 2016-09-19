@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:card_view="http://schemas.android.com/apk/res-auto"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@color/colorPrimary"--><!--android:scrollbars="none">-->
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,130 +12,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".loginAndRegister.control.RegisterActivity"
-    tools:showIn="@layout/activity_register">
+    tools:showIn="@layout/activity_register"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-
-    <LinearLayout
-        android:id="@+id/linear"
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/welcome_logo" />
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="@dimen/double_activity_vertical_margin"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etUserName"
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edittext"
-            android:gravity="center_vertical"
-            android:hint="用户名"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etUserPwd"
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etUserName"
-            android:background="@drawable/edittext"
-            android:hint="密码"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etUserPwdAgain"
-
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etUserPwd"
-            android:background="@drawable/edittext"
-            android:hint="确认密码"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etRealName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etUserPwdAgain"
-            android:background="@drawable/edittext"
-            android:hint="真实姓名"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-
-        <Switch
-            android:layout_below="@+id/etRealName"
-            android:textOn="男"
-            android:textOff="女"
-            android:background="@drawable/edittext"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            >
-        </Switch>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etCardId"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etSex"
-            android:background="@drawable/edittext"
-            android:hint="身份证号"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etCardId"
-            android:background="@drawable/edittext"
-            android:hint="手机"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/etType"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/etPhone"
-            android:background="@drawable/edittext"
-            android:hint="乘客类型"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
-    </LinearLayout>
-    <!--</android.support.v7.widget.CardView>-->
+        android:layout_height="200dp"/>
 
     <Button
         android:id="@+id/btnRegister"
@@ -166,4 +58,4 @@
         android:text="去登录>"
         android:textColor="@android:color/white"
         android:textSize="20dp" />
-</RelativeLayout><!--</ScrollView>-->
+</LinearLayout><!--</ScrollView>-->

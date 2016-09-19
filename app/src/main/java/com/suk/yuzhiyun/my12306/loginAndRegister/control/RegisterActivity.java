@@ -2,8 +2,12 @@ package com.suk.yuzhiyun.my12306.loginAndRegister.control;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -33,29 +38,35 @@ import butterknife.OnClick;
 public class RegisterActivity extends BaseActivity {
 
     String url = "http://192.168.0.115:8080/register.user";
+    //viewpager包含3个页面
+    @Bind(R.id.viewPager)
+    ViewPager viewPager;
+    //ViewPager内容
+    private ArrayList<View> mViewPagerContent = new ArrayList<View>(2);
+
     //用户名
-    @Bind(R.id.etUserName)
+//    @Bind(R.id.etUserName)
     AppCompatEditText etUserName;
     //密码
-    @Bind(R.id.etUserPwd)
+//    @Bind(R.id.etUserPwd)
     AppCompatEditText etUserPwd;
     //确认密码
-    @Bind(R.id.etUserPwdAgain)
+//    @Bind(R.id.etUserPwdAgain)
     AppCompatEditText etUserPwdAgain;
     //真实姓名
-    @Bind(R.id.etRealName)
+//    @Bind(R.id.etRealName)
     AppCompatEditText etRealName;
     //     //性别
 //    @Bind(R.id.etSex)
 //    AppCompatEditText etSex;
     //身份证号
-    @Bind(R.id.etCardId)
+//    @Bind(R.id.etCardId)
     AppCompatEditText etCardId;
     //手机
-    @Bind(R.id.etPhone)
+//    @Bind(R.id.etPhone)
     AppCompatEditText etPhone;
     //乘客类型
-    @Bind(R.id.etType)
+//    @Bind(R.id.etType)
     AppCompatEditText etType;
 
 
@@ -78,7 +89,54 @@ public class RegisterActivity extends BaseActivity {
     @Override
     protected void initOther() {
 
+        initViewPager();
+        viewPager.setAdapter(mPagerAdapter);
     }
+
+    private void initViewPager() {
+        View view1 = View.inflate(this, R.layout.register_view_pager1, null);
+        etUserName = (AppCompatEditText) view1.findViewById(R.id.etUserName);
+        etUserPwd = (AppCompatEditText) view1.findViewById(R.id.etUserPwd);
+        etUserPwdAgain = (AppCompatEditText) view1.findViewById(R.id.etUserPwdAgain);
+
+
+        View view2 = View.inflate(this, R.layout.register_view_pager2, null);
+        etRealName = (AppCompatEditText) view2.findViewById(R.id.etRealName);
+
+        View view3 = View.inflate(this, R.layout.register_view_pager3, null);
+        etCardId = (AppCompatEditText) view3.findViewById(R.id.etCardId);
+        etPhone = (AppCompatEditText) view3.findViewById(R.id.etPhone);
+        etType = (AppCompatEditText) view3.findViewById(R.id.etType);
+
+        mViewPagerContent.add(view1);
+        mViewPagerContent.add(view2);
+        mViewPagerContent.add(view3);
+    }
+
+    /**
+     * viewPager适配器
+     */
+    private PagerAdapter mPagerAdapter = new PagerAdapter() {
+        @Override
+        public int getCount() {
+            return mViewPagerContent.size();
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            container.addView(mViewPagerContent.get(position));
+            return mViewPagerContent.get(position);
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            ((ViewPager) container).removeView((View) object);
+        }
+    };
 
     /**
      * 跳转到登录
