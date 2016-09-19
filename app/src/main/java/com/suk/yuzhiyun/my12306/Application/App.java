@@ -27,7 +27,7 @@ public class App extends Application {
             "二等座"
     };
     public static String[] city=new String[]{"长沙","上海","北京","广州","杭州"};
-    public static String ip = "192.168.191.1";
+    public static String ip = "192.168.0.107";
     public static String type[] = {
             "成人",
             "儿童",

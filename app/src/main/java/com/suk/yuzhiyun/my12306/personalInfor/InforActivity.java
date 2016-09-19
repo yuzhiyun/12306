@@ -76,7 +76,7 @@ public class InforActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, EditInforActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

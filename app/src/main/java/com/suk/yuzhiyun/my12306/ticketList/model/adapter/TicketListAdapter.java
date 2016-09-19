@@ -230,11 +230,26 @@ public class TicketListAdapter extends BaseAdapter {
                         progressDialog.dismiss();
 //                        Log.i("onResponse", s.substring(0,20));
                         String id=null;
-                        String price;
+                        int price=0;
+                        int seatnumber=0;
+                        int utype=0;
+                        int gnumber=0;
+                        String date=null;
                         try {
                             JSONObject object=new JSONObject(s);
+//                            车票ID
                             id=object.getString("id");
-                            price=object.getString("price");
+//                            车票价格
+                            Double dPrice=object.getDouble("price");
+                            price=dPrice.intValue();
+//                            座位号
+                            seatnumber=object.getInt("seatnumber");
+//                            乘客类型
+                            utype=object.getInt("utype");
+//                            车厢号
+                            gnumber=object.getInt("gnumber");
+//                            日期
+                            date=object.getString("date");
                             Log.i("ticketonResponse",id+" "+price);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -245,6 +260,13 @@ public class TicketListAdapter extends BaseAdapter {
                         //支付的时候需要id和username,所以这里传递一个id过去
                         intent.putExtra("id",id);
                         intent.putExtra("position",position);
+                        intent.putExtra("price",price);
+                        intent.putExtra("seatnumber",seatnumber);
+                        intent.putExtra("utype",utype);
+                        intent.putExtra("gnumber",gnumber);
+                        intent.putExtra("date",date);
+
+
                         context.startActivity(intent);
                     }
                 },

@@ -57,11 +57,15 @@
             android:label="@string/title_activity_infor"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:parentActivityName=".ticketList.control.TicketListActivity"
             android:name=".ticketList.control.PayMoneyActivity"
             android:label="@string/title_activity_pay_moneyctivity"
+            android:parentActivityName=".ticketList.control.TicketListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:parentActivityName=".personalInfor.InforActivity"
+            android:name=".personalInfor.EditInforActivity"
+            android:label="@string/title_activity_edit_infor"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

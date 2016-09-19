@@ -15,4 +15,5 @@
     <string name="title_activity_infor">InforActivity</string>
     <string name="title_activity_reference">ReferenceActivity</string>
     <string name="title_activity_pay_moneyctivity">PayMoneyctivity</string>
+    <string name="title_activity_edit_infor">EditInforActivity</string>
 </resources>
