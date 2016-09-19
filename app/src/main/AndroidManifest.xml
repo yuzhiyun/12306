@@ -7,16 +7,16 @@
     <application
         android:name=".Application.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/desktop_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".inquire.MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".loginAndRegister.view.LoginRegisterActivity"
+            android:name=".loginAndRegister.control.LoginRegisterActivity"
             android:label="@string/title_activity_login_register"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,17 +26,42 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".loginAndRegister.view.LoginActivity"
+            android:name=".loginAndRegister.control.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".loginAndRegister.view.RegisterActivity"
+            android:name=".loginAndRegister.control.RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:parentActivityName=".inquire.MainActivity"
             android:name=".calendar.CalendarActivity"
             android:label="@string/title_activity_calendar"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".main.ChooseCityActivity"
+            android:label="@string/title_activity_choose_city"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".order.OrderActivity"
+            android:label="@string/title_activity_infor_and_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ticketList.control.TicketListActivity"
+            android:label="@string/title_activity_ticket_list"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".personalInfor.InforActivity"
+            android:label="@string/title_activity_infor"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:parentActivityName=".ticketList.control.TicketListActivity"
+            android:name=".ticketList.control.PayMoneyActivity"
+            android:label="@string/title_activity_pay_moneyctivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inquire.MainActivity">
+    tools:context=".main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
 
@@ -27,10 +27,10 @@
     <include layout="@layout/content_main" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/float_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-       >
+        android:layout_gravity="bottom|right">
 
         <LinearLayout
 
@@ -46,23 +46,24 @@
                 android:textColor="@color/colorPrimary" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/fabOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fab_ticket" />
+
             <TextView
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
         <LinearLayout
-android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -73,16 +74,17 @@ android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorPrimary" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab2"
+                android:id="@+id/fabInfor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/fab_user" />
+
             <TextView
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="资料"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
 
 
         </LinearLayout>

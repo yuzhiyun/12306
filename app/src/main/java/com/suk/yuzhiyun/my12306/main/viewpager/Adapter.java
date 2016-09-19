@@ -1,4 +1,4 @@
-package com.suk.yuzhiyun.my12306.inquire.viewpager;
+package com.suk.yuzhiyun.my12306.main.viewpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,8 +20,6 @@ public class Adapter extends FragmentPagerAdapter {
             ViewPagerFragment viewPagerFragment = new ViewPagerFragment(i);
             fragmentArrayList.add(viewPagerFragment);
         }
-
-
     }
 
     @Override

@@ -16,7 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
-import com.suk.yuzhiyun.my12306.inquire.MainActivity;
+import com.suk.yuzhiyun.my12306.main.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,18 +58,13 @@ public class InforActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("个人资料");
         //用户名密码是保存在本地的
-        tvUsername.setText(getUserName());
+        tvUsername.setText(App.getUserName(context));
 
         StringRequestPost(url);
 
     }
 
-    private String getUserName() {
-        return "maxiaolong";
-    }
-    private String getPassword() {
-        return "123456";
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,8 +133,8 @@ public class InforActivity extends BaseActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("username", getUserName());
-                map.put("password", getPassword());
+                map.put("username", App.getUserName(context));
+                map.put("password", App.getPassword(context));
                 return map;
             }
         };

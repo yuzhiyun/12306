@@ -1,4 +1,4 @@
-package com.suk.yuzhiyun.my12306.inquire.viewpager;
+package com.suk.yuzhiyun.my12306.main.viewpager;
 
 
 import android.os.Bundle;
@@ -18,7 +18,6 @@ public class ViewPagerFragment extends Fragment {
     int pictureIndex;
     public static int[] picture = new int[]{
             R.drawable.p1,
-            R.drawable.p2,
             R.drawable.p3,
             R.drawable.p4,};
 

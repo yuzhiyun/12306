@@ -31,7 +31,7 @@ import com.suk.yuzhiyun.my12306.order.OrderActivity;
 import com.suk.yuzhiyun.my12306.main.viewpager.Adapter;
 import com.suk.yuzhiyun.my12306.main.viewpager.ViewPagerFragment;
 import com.suk.yuzhiyun.my12306.personalInfor.InforActivity;
-import com.suk.yuzhiyun.my12306.ticketList.TicketListActivity;
+import com.suk.yuzhiyun.my12306.ticketList.control.TicketListActivity;
 import com.suk.yuzhiyun.my12306.ticketList.model.entity.Ticket;
 
 import org.json.JSONArray;
@@ -223,7 +223,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void search() {
 
         StringRequestPost(url);
-        startActivity(new Intent(context, TicketListActivity.class));
+
     }
 
 
@@ -269,55 +269,86 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                         // [[359,504,374,478,212,212]]
 
                         // ]
-
+                        App.mTicketList.clear();
                         try {
-                            JSONArray jsonArray=new JSONArray(s);
-                            JSONArray subJSONArray1=jsonArray.getJSONArray(0);
-                            JSONArray subJSONArray2=jsonArray.getJSONArray(1);
-                            JSONArray subJSONArray3=jsonArray.getJSONArray(2);
+                            JSONArray jsonArray = new JSONArray(s);
+                            JSONArray subJSONArray1 = jsonArray.getJSONArray(0);
+                            JSONArray subJSONArray2 = jsonArray.getJSONArray(1);
+                            JSONArray subJSONArray3 = jsonArray.getJSONArray(2);
                             /**
                              * 解析所有ticket,添加到App.mTicketList
                              */
-                            for(int i=0;i<subJSONArray1.length();i++){
 
-                                String mStartStation=subJSONArray1.getJSONObject(i).getString("startstation");
-                                String mEndStation=subJSONArray1.getJSONObject(i).getString("endstation");
-                                String mTrainNum=subJSONArray1.getJSONObject(i).getString("tid");
-                                String mStartTime=subJSONArray1.getJSONObject(i).getString("starttime");
-                                String mEndTime=subJSONArray1.getJSONObject(i).getString("endtime");
+                            for (int i = 0; i < subJSONArray1.length(); i++) {
+
+                                String date = subJSONArray1.getJSONObject(i).getString("date");
+                                String mStartStation = subJSONArray1.getJSONObject(i).getString("startstation");
+                                String mEndStation = subJSONArray1.getJSONObject(i).getString("endstation");
+                                String mTrainNum = subJSONArray1.getJSONObject(i).getString("tid");
+                                String mStartTime = subJSONArray1.getJSONObject(i).getString("starttime");
+                                String mEndTime = subJSONArray1.getJSONObject(i).getString("endtime");
 //                                String mDuration=subJSONArray1.getJSONObject(i).getString("mDuration");
 //                                需要计算时长，我暂时用一个特定值代替吧，以后再改
-                                String mDuration="5小时8分42";
-                                String mPrice=subJSONArray1.getJSONObject(i).getString("price");
+                                String mDuration = "5小时8分42";
+                                Double price=Double.parseDouble(subJSONArray1.getJSONObject(i).getString("price"));
+                                String mPrice = price.intValue()+"";
 
-                                Ticket ticket=new Ticket(mStartStation,mEndStation,mTrainNum,mStartTime,mEndTime,mDuration,mPrice);
+                                Ticket ticket = new Ticket(date,mStartStation, mEndStation, mTrainNum, mStartTime, mEndTime, mDuration, mPrice);
+
+//                                ObjectMapper mapper = new ObjectMapper();
+//                                // Convert object to JSON string
+//                                String jsonStr = "";
+//                                try {
+//                                    jsonStr =  mapper.writeValueAsString(obj);
+//                                } catch (IOException e) {
+//                                    throw e;
+//                                }
+//                                JSONObject ticketObject=new JSONObject();
+//                                ticketObject.put("ticket",ticket);
+//                                Log.i("ticket",ticketObject.toString());
+
+
                                 App.mTicketList.add(ticket);
-                                Log.i("json","第"+i+"张车票"+App.mTicketList.size()
-                                        +" "+ticket.getmStartStation()
-                                        +" "+ticket.getmEndStation()
-                                        +" "+ticket.getmTrainNum()
-                                        +" "+ticket.getmStartTime()
-                                        +" "+ticket.getmEndTime()
-                                        +" "+ticket.getmDuration()
-                                        +" "+ticket.getmPrice()
+                                Log.i("json", "第" + i + "张车票" + App.mTicketList.size()
+                                        + " " + ticket.getmStartStation()
+                                        + " " + ticket.getmEndStation()
+                                        + " " + ticket.getmTrainNum()
+                                        + " " + ticket.getmStartTime()
+                                        + " " + ticket.getmEndTime()
+                                        + " " + ticket.getmDuration()
+                                        + " " + ticket.getmPrice()
                                 );
                             }
                             /**
                              * 解析ticket的各类座位对应余票数量
                              */
-                            for(int i=0;i<subJSONArray2.length();i++){
+                            for (int i = 0; i < subJSONArray2.length(); i++) {
+                                JSONArray jsonArray1 = subJSONArray2.getJSONArray(i);
+                                int num=0;
+                                for (int j = 0; j < 6; j++) {
+                                   num=jsonArray1.getInt(j);
+                                    App.mTicketList.get(i).mTicketNum[j]=num;
+                                    Log.i("json", "第" + i + "张车票-第"+j+"种座位还有 " + num+" 张");
+                                }
 
                             }
                             /**
                              * 解析ticket的各类座位对应价格
                              */
-                            for(int i=0;i<subJSONArray2.length();i++){
+                            for (int i = 0; i < subJSONArray3.length(); i++) {
+                                JSONArray jsonArray2 = subJSONArray3.getJSONArray(i);
+                                for (int j = 0; j < 6; j++) {
+                                    Double  price=jsonArray2.getDouble(j);
+                                    App.mTicketList.get(i).mTicketPrice[j]=price.intValue();
 
+                                    Log.i("json", "第" + i + "种车票"+"第"+j+"种座位价格是  " + price.intValue());
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         Toast.makeText(MainActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(context, TicketListActivity.class));
                     }
                 },
                 new Response.ErrorListener() {
@@ -379,7 +410,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @OnClick(R.id.tvSeat)
     public void setSeat() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.
         builder.setItems(App.seats, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

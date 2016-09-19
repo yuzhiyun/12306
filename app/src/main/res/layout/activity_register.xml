@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".loginAndRegister.view.RegisterActivity">
+    android:background="@color/colorPrimary"
+    tools:context=".loginAndRegister.control.RegisterActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:fitsSystemWindows="true"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
+            android:visibility="gone"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

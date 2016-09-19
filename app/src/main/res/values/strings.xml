@@ -8,4 +8,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_choose_city">ChooseCityActivity</string>
+    <string name="title_activity_ss">ss</string>
+    <string name="title_activity_infor_and_order">InforAndOrderActivity</string>
+    <string name="title_activity_ticket_list">TicketListActivity</string>
+    <string name="title_activity_infor">InforActivity</string>
+    <string name="title_activity_reference">ReferenceActivity</string>
+    <string name="title_activity_pay_moneyctivity">PayMoneyctivity</string>
 </resources>

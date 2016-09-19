@@ -1,8 +1,7 @@
-package com.suk.yuzhiyun.my12306.loginAndRegister.view;
+package com.suk.yuzhiyun.my12306.loginAndRegister.control;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
+import com.suk.yuzhiyun.my12306.main.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,16 +45,16 @@ public class RegisterActivity extends BaseActivity {
     //真实姓名
     @Bind(R.id.etRealName)
     AppCompatEditText etRealName;
-     //性别
-    @Bind(R.id.etSex)
-    AppCompatEditText etSex;
+    //     //性别
+//    @Bind(R.id.etSex)
+//    AppCompatEditText etSex;
     //身份证号
     @Bind(R.id.etCardId)
     AppCompatEditText etCardId;
     //手机
     @Bind(R.id.etPhone)
     AppCompatEditText etPhone;
-   //乘客类型
+    //乘客类型
     @Bind(R.id.etType)
     AppCompatEditText etType;
 
@@ -113,6 +113,21 @@ public class RegisterActivity extends BaseActivity {
         Log.i("json", json());
     }
 
+    public static String json() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONArray array = new JSONArray();
+            JSONObject data = new JSONObject();
+            data.put("name", "俞志云");
+            data.put("pwd", "12345");
+            array.put(data);
+            jsonObject.put("register", array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
+    }
+
     /**
      * 验证电话
      *
@@ -151,25 +166,6 @@ public class RegisterActivity extends BaseActivity {
         return rs;
     }
 
-    /**
-     * 测试json的使用
-     *
-     * @return {"register":[{"pwd":"12345","name":"俞志云"}]}
-     */
-    public String json() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            JSONArray array = new JSONArray();
-            JSONObject data = new JSONObject();
-            data.put("name", "俞志云");
-            data.put("pwd", "12345");
-            array.put(data);
-            jsonObject.put("register", array);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonObject.toString();
-    }
 
     private void StringRequestPost(String url) {
 //        进度对话框
@@ -184,8 +180,15 @@ public class RegisterActivity extends BaseActivity {
                     public void onResponse(String s) {
                         progressDialog.dismiss();
                         Log.i("onResponse", s);
-                        Toast.makeText(context, "服务器" + s, Toast.LENGTH_SHORT).show();
-                        tvSeverMsg.setText(s);
+
+                        if (s.contains("success")) {
+                            Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(context, MainActivity.class));
+                        } else {
+                            tvSeverMsg.setText("用户名或密码错误");
+                        }
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -204,7 +207,7 @@ public class RegisterActivity extends BaseActivity {
                 map.put("username", etUserName.getText().toString().trim());
                 map.put("password", etUserPwd.getText().toString().trim());
                 map.put("name", etRealName.getText().toString().trim());
-                map.put("sex", etSex.getText().toString().trim());
+//                map.put("sex", etSex.getText().toString().trim());
                 map.put("idnumber", etCardId.getText().toString().trim());
                 map.put("tel", etPhone.getText().toString().trim());
                 //0-成人，1-学生，2-儿童，3-伤残军人

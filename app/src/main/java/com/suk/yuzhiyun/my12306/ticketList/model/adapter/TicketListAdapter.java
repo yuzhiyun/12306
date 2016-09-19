@@ -3,6 +3,7 @@ package com.suk.yuzhiyun.my12306.ticketList.model.adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
-import com.suk.yuzhiyun.my12306.ticketList.control.TicketListActivity;
+import com.suk.yuzhiyun.my12306.ticketList.control.PayMoneyActivity;
 import com.suk.yuzhiyun.my12306.ticketList.model.entity.Ticket;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +38,11 @@ import java.util.Map;
 public class TicketListAdapter extends BaseAdapter {
 
     String url = "http://" + App.ip + ":8080/purchase.ticket";
+
+    /**
+     * 座位类型选择
+     */
+    int index = 0;
     Context context;
 
     public TicketListAdapter(Context context) {
@@ -89,11 +95,10 @@ public class TicketListAdapter extends BaseAdapter {
         viewHolder.tvTrainNum.setText((getItem(position)).getmTrainNum());
 
 
-
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("onClick","onClick");
+                Log.i("onClick", "onClick");
                 View dialogView = LayoutInflater.from(context).inflate(R.layout.ticket_list_item_in_dialog, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(dialogView);
@@ -103,7 +108,7 @@ public class TicketListAdapter extends BaseAdapter {
                  * 弹出框点击事件
                  *
                  * */
-                TextView tvStartCity=(TextView)dialogView.findViewById(R.id.tvStartCity);
+                TextView tvStartCity = (TextView) dialogView.findViewById(R.id.tvStartCity);
                 TextView tvStartTime = (TextView) dialogView.findViewById(R.id.tvStartTime);
                 TextView tvTrainNum = (TextView) dialogView.findViewById(R.id.tvTrainNum);
                 TextView tvEndCity = (TextView) dialogView.findViewById(R.id.tvEndCity);
@@ -124,6 +129,43 @@ public class TicketListAdapter extends BaseAdapter {
                 TextView tvPrice4 = (TextView) dialogView.findViewById(R.id.tvPrice4);
                 TextView tvPrice5 = (TextView) dialogView.findViewById(R.id.tvPrice5);
 
+                final int[] linearLayoutId = {
+                        R.id.linear0,
+                        R.id.linear1,
+                        R.id.linear2,
+                        R.id.linear3,
+                        R.id.linear4,
+                        R.id.linear5
+                };
+                final LinearLayout[] linearLayout = new LinearLayout[6];
+                /**
+                 * 被点击的LinearLayout设置为红色
+                 * 同时记录对应的座位下标
+                 * */
+                for (int i = 0; i < linearLayoutId.length; i++) {
+                    final LinearLayout linear = (LinearLayout) dialogView.findViewById(linearLayoutId[i]);
+                    linearLayout[i] = linear;
+
+                }
+                for (int i = 0; i < linearLayoutId.length; i++) {
+                    final int x = i;
+                    linearLayout[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //全局变量记录对应的座位下标，到时候传给服务器，表示座位类型
+                            index = x;
+                            for (int j = 0; j < 6; j++)
+                                linearLayout[j].setBackgroundColor(Color.WHITE);
+                            //红色
+                            linearLayout[x].setBackgroundColor(Color.RED);
+                            //改变价格
+                            getItem(position).setmPrice(getItem(position).mTicketPrice[x] + "");
+
+                        }
+                    });
+                }
+
+
                 Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
                 Button btnOk = (Button) dialogView.findViewById(R.id.btnOk);
                 /**
@@ -134,7 +176,7 @@ public class TicketListAdapter extends BaseAdapter {
 
                     @Override
                     public void onClick(View v) {
-                        StringRequestPost(url);
+                        StringRequestPost(url,position);
                     }
                 });
 
@@ -145,19 +187,19 @@ public class TicketListAdapter extends BaseAdapter {
                 tvEndTime.setText((getItem(position)).getmEndTime());
                 tvDuration.setText((getItem(position)).getmDuration());
 
-                tvSeatType0.setText((getItem(position)).mTicketNum[0]+"张");
-                tvSeatType1.setText((getItem(position)).mTicketNum[1]+"张");
-                tvSeatType2.setText((getItem(position)).mTicketNum[2]+"张");
-                tvSeatType3.setText((getItem(position)).mTicketNum[3]+"张");
-                tvSeatType4.setText((getItem(position)).mTicketNum[4]+"张");
-                tvSeatType5.setText((getItem(position)).mTicketNum[5]+"张");
+                tvSeatType0.setText((getItem(position)).mTicketNum[0] + "张");
+                tvSeatType1.setText((getItem(position)).mTicketNum[1] + "张");
+                tvSeatType2.setText((getItem(position)).mTicketNum[2] + "张");
+                tvSeatType3.setText((getItem(position)).mTicketNum[3] + "张");
+                tvSeatType4.setText((getItem(position)).mTicketNum[4] + "张");
+                tvSeatType5.setText((getItem(position)).mTicketNum[5] + "张");
 
-                tvPrice0.setText("￥"+(getItem(position)).mTicketPrice[0]);
-                tvPrice1.setText("￥"+(getItem(position)).mTicketPrice[1]);
-                tvPrice2.setText("￥"+(getItem(position)).mTicketPrice[2]);
-                tvPrice3.setText("￥"+(getItem(position)).mTicketPrice[3]);
-                tvPrice4.setText("￥"+(getItem(position)).mTicketPrice[4]);
-                tvPrice5.setText("￥"+(getItem(position)).mTicketPrice[5]);
+                tvPrice0.setText("￥" + (getItem(position)).mTicketPrice[0]);
+                tvPrice1.setText("￥" + (getItem(position)).mTicketPrice[1]);
+                tvPrice2.setText("￥" + (getItem(position)).mTicketPrice[2]);
+                tvPrice3.setText("￥" + (getItem(position)).mTicketPrice[3]);
+                tvPrice4.setText("￥" + (getItem(position)).mTicketPrice[4]);
+                tvPrice5.setText("￥" + (getItem(position)).mTicketPrice[5]);
 
 
 //                builder.setTitle(App.mTicketList.get(0).getmDate());
@@ -174,7 +216,7 @@ public class TicketListAdapter extends BaseAdapter {
      *
      * @param url
      */
-    private void StringRequestPost(String url) {
+    private void StringRequestPost(String url, final int position) {
         //        进度对话框
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("正在连接...");
@@ -186,8 +228,24 @@ public class TicketListAdapter extends BaseAdapter {
 
                     public void onResponse(String s) {
                         progressDialog.dismiss();
-                        Log.i("onResponse", s);
-                        Toast.makeText(context, "错误" + s, Toast.LENGTH_SHORT).show();
+//                        Log.i("onResponse", s.substring(0,20));
+                        String id=null;
+                        String price;
+                        try {
+                            JSONObject object=new JSONObject(s);
+                            id=object.getString("id");
+                            price=object.getString("price");
+                            Log.i("ticketonResponse",id+" "+price);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Toast.makeText(context, "返回正确" + s, Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(context, PayMoneyActivity.class);
+                        //支付的时候需要id和username,所以这里传递一个id过去
+                        intent.putExtra("id",id);
+                        intent.putExtra("position",position);
+                        context.startActivity(intent);
                     }
                 },
                 new Response.ErrorListener() {
@@ -210,18 +268,18 @@ public class TicketListAdapter extends BaseAdapter {
     }
 
     public String json() {
-            JSONObject data = new JSONObject();
-        Ticket ticket=App.mTicketList.get(0);
+        JSONObject data = new JSONObject();
+        Ticket ticket = App.mTicketList.get(0);
         try {
             data.put("username", App.getUserName(context));
-            data.put("date",  ticket.getmDate());
-            data.put("startstation",  ticket.getmStartStation());
-            data.put( "endstation", ticket.getmEndStation());
+            data.put("date", ticket.getmDate());
+            data.put("startstation", ticket.getmStartStation());
+            data.put("endstation", ticket.getmEndStation());
             data.put("tid", ticket.getmTrainNum());
             data.put("starttime", ticket.getmStartTime());
             data.put("endtime", ticket.getmEndTime());
-            data.put("price",ticket.getmPrice());
-            data.put("seattype",0);
+            data.put("price", ticket.getmPrice());
+            data.put("seattype", index);
         } catch (JSONException e) {
             e.printStackTrace();
         }
