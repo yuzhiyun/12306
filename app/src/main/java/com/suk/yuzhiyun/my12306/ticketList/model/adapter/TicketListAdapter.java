@@ -32,6 +32,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by yuzhiyun on 2016-09-12.
  */
@@ -71,16 +74,17 @@ public class TicketListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.ticket_list_item, null);
-            TextView tvStartCity = (TextView) convertView.findViewById(R.id.tvStartCity);
-            TextView tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
-            TextView tvTrainNum = (TextView) convertView.findViewById(R.id.tvTrainNum);
-            TextView tvDuration = (TextView) convertView.findViewById(R.id.tvDuration);
-            TextView tvEndCity = (TextView) convertView.findViewById(R.id.tvEndCity);
-            TextView tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
-            Button btnPrice = (Button) convertView.findViewById(R.id.btnPrice);
-            CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
+//            TextView tvStartCity = (TextView) convertView.findViewById(R.id.tvStartCity);
+//            TextView tvStartTime = (TextView) convertView.findViewById(R.id.tvStartTime);
+//            TextView tvTrainNum = (TextView) convertView.findViewById(R.id.tvTrainNum);
+//            TextView tvDuration = (TextView) convertView.findViewById(R.id.tvDuration);
+//            TextView tvEndCity = (TextView) convertView.findViewById(R.id.tvEndCity);
+//            TextView tvEndTime = (TextView) convertView.findViewById(R.id.tvEndTime);
+//            Button btnPrice = (Button) convertView.findViewById(R.id.btnPrice);
+//            CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
 
-            viewHolder = new ViewHolder(cardView, btnPrice, tvStartCity, tvStartTime, tvTrainNum, tvDuration, tvEndCity, tvEndTime);
+//            viewHolder = new ViewHolder(cardView, btnPrice, tvStartCity, tvStartTime, tvTrainNum, tvDuration, tvEndCity, tvEndTime);
+            viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -312,27 +316,37 @@ public class TicketListAdapter extends BaseAdapter {
 
 class ViewHolder {
 
+    @Bind(R.id.cardView)
     CardView cardView;
-
+    @Bind(R.id.btnPrice)
     Button btnPrice;
 
+    @Bind(R.id.tvStartCity)
     TextView tvStartCity;
+    @Bind(R.id.tvStartTime)
     TextView tvStartTime;
+    @Bind(R.id.tvTrainNum)
     TextView tvTrainNum;
+    @Bind(R.id.tvDuration)
     TextView tvDuration;
+    @Bind(R.id.tvEndCity)
     TextView tvEndCity;
+    @Bind(R.id.tvEndTime)
     TextView tvEndTime;
 
 
-    public ViewHolder(CardView cardView, Button btnPrice, TextView tvStartCity, TextView tvStartTime, TextView tvTrainNum,
-                      TextView tvDuration, TextView tvEndCity, TextView tvEndTime) {
-        this.cardView = cardView;
-        this.btnPrice = btnPrice;
-        this.tvStartCity = tvStartCity;
-        this.tvStartTime = tvStartTime;
-        this.tvTrainNum = tvTrainNum;
-        this.tvDuration = tvDuration;
-        this.tvEndCity = tvEndCity;
-        this.tvEndTime = tvEndTime;
+//    public ViewHolder(CardView cardView, Button btnPrice, TextView tvStartCity, TextView tvStartTime, TextView tvTrainNum,
+//                      TextView tvDuration, TextView tvEndCity, TextView tvEndTime) {
+//        this.cardView = cardView;
+//        this.btnPrice = btnPrice;
+//        this.tvStartCity = tvStartCity;
+//        this.tvStartTime = tvStartTime;
+//        this.tvTrainNum = tvTrainNum;
+//        this.tvDuration = tvDuration;
+//        this.tvEndCity = tvEndCity;
+//        this.tvEndTime = tvEndTime;
+//    }
+    public ViewHolder(View view){
+        ButterKnife.bind(this,view);
     }
 }
