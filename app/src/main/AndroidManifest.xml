@@ -44,7 +44,8 @@
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".order.OrderActivity"
+            android:parentActivityName=".main.MainActivity"
+            android:name=".order.control.activity.OrderActivity"
             android:label="@string/title_activity_infor_and_order"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

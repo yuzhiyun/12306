@@ -17,7 +17,7 @@ public class OrderFragmentAdapter extends FragmentPagerAdapter{
 
     List<Fragment> fragmentList=new ArrayList<Fragment>();
     public OrderFragmentAdapter(FragmentManager fm) {
-        super(fm); 
+        super(fm);
         fragmentList.add(new PayedOrderFragment());
         fragmentList.add(new UnpayedOrderFragment());
     }

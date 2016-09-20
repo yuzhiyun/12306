@@ -27,7 +27,7 @@ import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
 import com.suk.yuzhiyun.my12306.calendar.CalendarActivity;
 import com.suk.yuzhiyun.my12306.calendar.DateUtil;
-import com.suk.yuzhiyun.my12306.order.OrderActivity;
+import com.suk.yuzhiyun.my12306.order.control.activity.OrderActivity;
 import com.suk.yuzhiyun.my12306.main.viewpager.Adapter;
 import com.suk.yuzhiyun.my12306.main.viewpager.ViewPagerFragment;
 import com.suk.yuzhiyun.my12306.personalInfor.InforActivity;
@@ -295,17 +295,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
                                 Ticket ticket = new Ticket(date,mStartStation, mEndStation, mTrainNum, mStartTime, mEndTime, mDuration, mPrice);
 
-//                                ObjectMapper mapper = new ObjectMapper();
-//                                // Convert object to JSON string
-//                                String jsonStr = "";
-//                                try {
-//                                    jsonStr =  mapper.writeValueAsString(obj);
-//                                } catch (IOException e) {
-//                                    throw e;
-//                                }
-//                                JSONObject ticketObject=new JSONObject();
-//                                ticketObject.put("ticket",ticket);
-//                                Log.i("ticket",ticketObject.toString());
+//
 
 
                                 App.mTicketList.add(ticket);

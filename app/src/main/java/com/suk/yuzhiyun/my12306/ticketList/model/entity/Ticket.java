@@ -1,7 +1,7 @@
 package com.suk.yuzhiyun.my12306.ticketList.model.entity;
 
 /**
- * 一张火车票
+ * 这里其实不是实质的一张火车票，而是满足查询条件的车次，包含余票属性、各种座位票价属性
  * Created by yuzhiyun on 2016-09-17.
  */
 public class Ticket {

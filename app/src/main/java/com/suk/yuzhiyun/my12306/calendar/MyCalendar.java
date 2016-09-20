@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+
+import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.calendar.CalendarConfig.CalendarState;
 
 /**
@@ -239,7 +241,7 @@ public class MyCalendar extends View {
 
 			// 初始化绘画圆圈的画笔
 			mPaintCircle = new Paint();
-			mPaintCircle.setColor(Color.argb(100, 112, 199, 244));// 设置蓝色
+			mPaintCircle.setColor(getResources().getColor(R.color.colorPrimary));// 设置蓝色
 			mPaintCircle.setAntiAlias(true);// 设置画笔的锯齿效果。
 		}
 

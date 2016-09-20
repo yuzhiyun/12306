@@ -11,9 +11,17 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.suk.yuzhiyun.my12306.calendar.CalendarActivity"
     tools:showIn="@layout/activity_calendar">
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="5dp"
+
+        >
 <com.suk.yuzhiyun.my12306.calendar.MyCalendar
     android:id="@+id/myCalendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     />
+    </android.support.v7.widget.CardView>>
 </RelativeLayout>

@@ -7,22 +7,25 @@
     tools:context="com.suk.yuzhiyun.my12306.calendar.CalendarActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:layout_gravity="center_horizontal"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            android:gravity="center_horizontal"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal">
+
                 <ImageView
                     android:id="@+id/imgLeft"
                     android:layout_width="wrap_content"
@@ -31,16 +34,16 @@
                     android:src="@drawable/triangle06" />
 
                 <TextView
-
                     android:id="@+id/tvTime"
-                    android:textSize="@dimen/text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:gravity="center"
-                    android:text="2016--08" />
+                    android:text="2016--08"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text" />
 
                 <ImageView
                     android:id="@+id/imgRight"
@@ -55,7 +58,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_calendar" />
-
 
 
 </android.support.design.widget.CoordinatorLayout>

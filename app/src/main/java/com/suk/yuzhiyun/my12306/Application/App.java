@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.suk.yuzhiyun.my12306.order.model.entity.Order;
 import com.suk.yuzhiyun.my12306.ticketList.model.entity.Ticket;
 
 import java.util.ArrayList;
@@ -18,6 +19,14 @@ import java.util.List;
 public class App extends Application {
 
     public static List<Ticket> mTicketList=new ArrayList<Ticket>();
+    /**
+     * 已支付订单
+     */
+    public static List<Order> mPayedOrderList=new ArrayList<Order>();
+    /**
+     * 未支付订单
+     */
+    public static List<Order> mUnpayedOrderList=new ArrayList<Order>();
     public static String[] seats = new String[]{
             "硬座",
             "软座",
@@ -27,7 +36,7 @@ public class App extends Application {
             "二等座"
     };
     public static String[] city=new String[]{"长沙","上海","北京","广州","杭州"};
-    public static String ip = "192.168.0.107";
+    public static String ip = "192.168.191.1";
     public static String type[] = {
             "成人",
             "儿童",
@@ -35,6 +44,7 @@ public class App extends Application {
             "伤残人士",
             "老年人"
     };
+
     public static String sex[] = {
             "女",
             "男"
