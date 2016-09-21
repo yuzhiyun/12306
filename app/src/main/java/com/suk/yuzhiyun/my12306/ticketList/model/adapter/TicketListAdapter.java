@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,13 +24,10 @@ import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.ticketList.control.PayMoneyActivity;
 import com.suk.yuzhiyun.my12306.ticketList.model.entity.Ticket;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

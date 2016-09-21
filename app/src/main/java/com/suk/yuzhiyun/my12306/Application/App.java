@@ -29,6 +29,7 @@ public class App extends Application {
 
 
     public  SharedPreferences getSharedPreferences(Context context){
+        //很奇怪，不加contex,就获取不到SharedPreferences
         if(SPsavaData==null)
             SPsavaData=context.getSharedPreferences("user", Activity.MODE_PRIVATE);
         return SPsavaData;

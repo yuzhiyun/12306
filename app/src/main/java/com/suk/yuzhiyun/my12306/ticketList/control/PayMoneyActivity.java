@@ -3,9 +3,15 @@ package com.suk.yuzhiyun.my12306.ticketList.control;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +24,7 @@ import com.suk.yuzhiyun.my12306.Application.App;
 import com.suk.yuzhiyun.my12306.R;
 import com.suk.yuzhiyun.my12306.base.BaseActivity;
 import com.suk.yuzhiyun.my12306.main.MainActivity;
+import com.suk.yuzhiyun.my12306.ticketList.model.util.MusicPlay;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +36,15 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class PayMoneyActivity extends BaseActivity {
+    @Bind(R.id.imgRocket)
+    ImageView imgRocket;
+
+    @Bind(R.id.imgRocketDown)
+    ImageView imgRocketDown;
+
+    @Bind(R.id.appLayout)
+    AppBarLayout appLayout;
+
     @Bind(R.id.tvStartCity)
     TextView tvStartCity;
 
@@ -62,7 +78,7 @@ public class PayMoneyActivity extends BaseActivity {
     @Bind(R.id.tvPrice)
     TextView tvPrice;
 
-@Bind(R.id.tvDate)
+    @Bind(R.id.tvDate)
     TextView tvDate;
 
 
@@ -70,6 +86,18 @@ public class PayMoneyActivity extends BaseActivity {
 
     @Bind(R.id.btnPay)
     Button btnPay;
+
+    /**
+     * 小火箭起飞后几秒钟开始跳转到其他页面
+     */
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            startActivity(new Intent(context, MainActivity.class));
+
+        }
+    };
 
     @Override
     protected void setLayoutView() {
@@ -99,11 +127,10 @@ public class PayMoneyActivity extends BaseActivity {
 
             tvUsername.setText(App.getUserName(context));
 
-            tvUserType.setText(App.type[getIntent().getIntExtra("utype",-1)]);
-            tvCarriage.setText("车厢号:"+getIntent().getIntExtra("gnumber",-1)+"");
-            tvPrice.setText("￥"+getIntent().getIntExtra("price",-1)+"");
-            tvSeatNum.setText("座位号:"+getIntent().getIntExtra("seatnumber",-1)+"");
-
+            tvUserType.setText(App.type[getIntent().getIntExtra("utype", -1)]);
+            tvCarriage.setText("车厢号:" + getIntent().getIntExtra("gnumber", -1) + "");
+            tvPrice.setText("￥" + getIntent().getIntExtra("price", -1) + "");
+            tvSeatNum.setText("座位号:" + getIntent().getIntExtra("seatnumber", -1) + "");
 
 
         }
@@ -142,7 +169,17 @@ public class PayMoneyActivity extends BaseActivity {
                                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 dialog.dismiss();
-                                                startActivity(new Intent(context, MainActivity.class));
+                                                appLayout.setVisibility(View.GONE);
+//                                                imgRocketDown.setVisibility(View.VISIBLE);
+//                                                imgRocketDown.startAnimation(AnimationUtils.loadAnimation(context, R.anim.translate_down));
+//                                                播放小段音频
+                                                MusicPlay p=new MusicPlay(context);
+                                                p.start();
+                                                imgRocket.setVisibility(View.VISIBLE);
+                                                imgRocket.startAnimation(AnimationUtils.loadAnimation(context, R.anim.translate));
+
+
+                                                handler.sendEmptyMessageDelayed(1, 900);
                                             }
                                         });
                                 builder.create().show();
