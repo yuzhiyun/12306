@@ -1,11 +1,16 @@
 package com.suk.yuzhiyun.my12306.loginAndRegister.control;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,11 +41,17 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity {
-
-    String url = "http://192.168.0.115:8080/register.user";
+    String url = "http://" + App.ip + "/register.user";
     //viewpager包含3个页面
     @Bind(R.id.viewPager)
     ViewPager viewPager;
+
+    int type=0;
+
+    /**
+     * ViewPager当前item
+     */
+    int currentItem = 0;
     //ViewPager内容
     private ArrayList<View> mViewPagerContent = new ArrayList<View>(2);
 
@@ -67,19 +78,26 @@ public class RegisterActivity extends BaseActivity {
     AppCompatEditText etPhone;
     //乘客类型
 //    @Bind(R.id.etType)
-    AppCompatEditText etType;
-
+//    AppCompatEditText etType;
+    Button btnMale;
+    Button btnFeMale;
 
     //注册
     @Bind(R.id.btnRegister)
     Button btnRegister;
+    //下一步
+    @Bind(R.id.btnNext)
+    Button btnNext;
     //登录
     @Bind(R.id.tvLogin)
     TextView tvLogin;
+
+    //类型选择
+    TextView tvType;
     //服务器信息
     @Bind(R.id.tvSeverMsg)
     TextView tvSeverMsg;
-
+    int sexIndex=0;
 
     @Override
     protected void setLayoutView() {
@@ -91,6 +109,32 @@ public class RegisterActivity extends BaseActivity {
 
         initViewPager();
         viewPager.setAdapter(mPagerAdapter);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                currentItem = position;
+                if (position < 2) {
+                    btnRegister.setVisibility(View.GONE);
+                    btnNext.setVisibility(View.VISIBLE);
+                } else {
+                    btnRegister.setVisibility(View.VISIBLE);
+                    btnNext.setVisibility(View.GONE);
+                }
+
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void initViewPager() {
@@ -102,12 +146,38 @@ public class RegisterActivity extends BaseActivity {
 
         View view2 = View.inflate(this, R.layout.register_view_pager2, null);
         etRealName = (AppCompatEditText) view2.findViewById(R.id.etRealName);
+        btnMale = (Button) view2.findViewById(R.id.btnMale);
+        btnFeMale = (Button) view2.findViewById(R.id.btnFeMale);
+        btnMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sexIndex=0;
+                btnMale.setBackgroundColor(Color.WHITE);
+                btnFeMale.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+        });
+
+        btnFeMale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sexIndex=1;
+                btnMale.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                btnFeMale.setBackgroundColor(Color.WHITE);
+            }
+        });
+
+
 
         View view3 = View.inflate(this, R.layout.register_view_pager3, null);
         etCardId = (AppCompatEditText) view3.findViewById(R.id.etCardId);
         etPhone = (AppCompatEditText) view3.findViewById(R.id.etPhone);
-        etType = (AppCompatEditText) view3.findViewById(R.id.etType);
-
+        tvType = (TextView) view3.findViewById(R.id.tvType);
+        tvType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvType();
+            }
+        });
         mViewPagerContent.add(view1);
         mViewPagerContent.add(view2);
         mViewPagerContent.add(view3);
@@ -132,6 +202,7 @@ public class RegisterActivity extends BaseActivity {
         public boolean isViewFromObject(View view, Object obj) {
             return view == obj;
         }
+
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             ((ViewPager) container).removeView((View) object);
@@ -144,6 +215,26 @@ public class RegisterActivity extends BaseActivity {
     @OnClick(R.id.tvLogin)
     public void login() {
         startActivity(new Intent(context, LoginActivity.class));
+    }
+
+//    /**
+//     * 选择乘客type
+//     */
+//    @OnClick(R.id.tvType)
+    public void tvType() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setItems(App.type, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                type = which;
+                tvType.setText(App.type[which]);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+
     }
 
     /**
@@ -169,6 +260,16 @@ public class RegisterActivity extends BaseActivity {
         else
             tvSeverMsg.setText("两次密码输入不一致");
         Log.i("json", json());
+    }
+
+    /**
+     * 下一步
+     */
+    @OnClick(R.id.btnNext)
+    public void btnNext() {
+
+        viewPager.setCurrentItem((currentItem+1)%3);
+
     }
 
     public static String json() {
@@ -240,13 +341,12 @@ public class RegisterActivity extends BaseActivity {
                         Log.i("onResponse", s);
 
                         if (s.contains("success")) {
-                            Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "注册成功", Toast.LENGTH_SHORT).show();
+                            saveInSharedPreference();
                             startActivity(new Intent(context, MainActivity.class));
                         } else {
-                            tvSeverMsg.setText("用户名或密码错误");
+                            tvSeverMsg.setText("未知错误");
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -260,19 +360,33 @@ public class RegisterActivity extends BaseActivity {
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("username", etUserName.getText().toString().trim());
                 map.put("password", etUserPwd.getText().toString().trim());
                 map.put("name", etRealName.getText().toString().trim());
-//                map.put("sex", etSex.getText().toString().trim());
+                map.put("sex", sexIndex+"");
                 map.put("idnumber", etCardId.getText().toString().trim());
                 map.put("tel", etPhone.getText().toString().trim());
                 //0-成人，1-学生，2-儿童，3-伤残军人
-                map.put("type", etType.getText().toString().trim());
+                map.put("type", type+"");
                 return map;
             }
         };
         App.getRequestQueue(context).add(request);
+    }
+
+    /**
+     * 注册成功的时候在本地存储用户名密码
+     */
+    private void saveInSharedPreference() {
+
+        SharedPreferences SPsaveData=App.getInstance().getSharedPreferences(context);
+        //                      第二步，获得editor对象
+        SharedPreferences.Editor editor = SPsaveData.edit();
+//                      第三步，存储数据
+        editor.putString("username", etUserName.getText().toString().trim());
+        editor.putString("password", etUserPwd.getText().toString().trim());
+//                      第四步，提交操作，类似于数据库
+        editor.commit();
     }
 }

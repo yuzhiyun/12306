@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,7 +48,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
     //{"inquire":[{"username":"maxiaolong",startstation":"北京","endstation":"长沙","date":"2016-9-14","seatType":0}]}
 
-    String url = "http://" + App.ip + ":8080/check.ticket";
+    String url = "http://" + App.ip + "/check.ticket";
 
     int seatPosition = 0;
     @Bind(R.id.fabOrder)
@@ -337,7 +338,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(MainActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "服务器" + s, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(context, TicketListActivity.class));
                     }
                 },
@@ -466,4 +467,50 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void onPageScrollStateChanged(int state) {
 
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK )
+        {
+            // 创建退出对话框
+            AlertDialog isExit = new AlertDialog.Builder(this).create();
+            // 设置对话框标题
+            isExit.setTitle("系统提示");
+            // 设置对话框消息
+            isExit.setMessage("确定要退出吗");
+            // 添加选择按钮并注册监听
+            isExit.setButton("确定", listener);
+            isExit.setButton2("取消", listener);
+            // 显示对话框
+            isExit.show();
+
+        }
+
+        return false;
+
+    }
+    /**
+     * 监听对话框里面的button点击事件
+     * */
+    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()
+    {
+        public void onClick(DialogInterface dialog, int which)
+        {
+            switch (which)
+            {
+                case AlertDialog.BUTTON_POSITIVE:// "确认"按钮退出程序
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    break;
+                case AlertDialog.BUTTON_NEGATIVE:// "取消"第二个按钮取消对话框
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }

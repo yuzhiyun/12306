@@ -40,7 +40,7 @@ import butterknife.ButterKnife;
  */
 public class TicketListAdapter extends BaseAdapter {
 
-    String url = "http://" + App.ip + ":8080/purchase.ticket";
+    String url = "http://" + App.ip + "/purchase.ticket";
 
     /**
      * 座位类型选择
@@ -93,7 +93,7 @@ public class TicketListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.i("onClick", "onClick");
-                View dialogView = LayoutInflater.from(context).inflate(R.layout.ticket_list_item_in_dialog, null);
+                final View dialogView = LayoutInflater.from(context).inflate(R.layout.ticket_list_item_in_dialog, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(dialogView);
 
@@ -139,6 +139,11 @@ public class TicketListAdapter extends BaseAdapter {
                     linearLayout[i] = linear;
 
                 }
+
+                /**
+                 * 默认选择第一种座位，呈现淡色
+                 * */
+                linearLayout[0].setBackgroundColor(context.getResources().getColor(R.color.ba));
                 for (int i = 0; i < linearLayoutId.length; i++) {
                     final int x = i;
                     linearLayout[i].setOnClickListener(new View.OnClickListener() {
@@ -148,8 +153,8 @@ public class TicketListAdapter extends BaseAdapter {
                             index = x;
                             for (int j = 0; j < 6; j++)
                                 linearLayout[j].setBackgroundColor(Color.WHITE);
-                            //红色
-                            linearLayout[x].setBackgroundColor(Color.RED);
+                            //淡色
+                            linearLayout[x].setBackgroundColor(context.getResources().getColor(R.color.ba));
                             //改变价格
                             getItem(position).setmPrice(getItem(position).mTicketPrice[x] + "");
 
@@ -158,7 +163,8 @@ public class TicketListAdapter extends BaseAdapter {
                 }
 
 
-                Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
+//                Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
+
                 Button btnOk = (Button) dialogView.findViewById(R.id.btnOk);
                 /**
                  * 向服务器发送购票请求
@@ -168,7 +174,10 @@ public class TicketListAdapter extends BaseAdapter {
 
                     @Override
                     public void onClick(View v) {
-                        StringRequestPost(url,position);
+                        if (0 == getItem(position).mTicketNum[index])
+                            Toast.makeText(context, "无票，请重新选择", Toast.LENGTH_LONG).show();
+                        else
+                            StringRequestPost(url, position);
                     }
                 });
 
@@ -221,41 +230,41 @@ public class TicketListAdapter extends BaseAdapter {
                     public void onResponse(String s) {
                         progressDialog.dismiss();
 //                        Log.i("onResponse", s.substring(0,20));
-                        String id=null;
-                        int price=0;
-                        int seatnumber=0;
-                        int utype=0;
-                        int gnumber=0;
-                        String date=null;
+                        String id = null;
+                        int price = 0;
+                        int seatnumber = 0;
+                        int utype = 0;
+                        int gnumber = 0;
+                        String date = null;
                         try {
-                            JSONObject object=new JSONObject(s);
+                            JSONObject object = new JSONObject(s);
 //                            车票ID
-                            id=object.getString("id");
+                            id = object.getString("id");
 //                            车票价格
-                            Double dPrice=object.getDouble("price");
-                            price=dPrice.intValue();
+                            Double dPrice = object.getDouble("price");
+                            price = dPrice.intValue();
 //                            座位号
-                            seatnumber=object.getInt("seatnumber");
+                            seatnumber = object.getInt("seatnumber");
 //                            乘客类型
-                            utype=object.getInt("utype");
+                            utype = object.getInt("utype");
 //                            车厢号
-                            gnumber=object.getInt("gnumber");
+                            gnumber = object.getInt("gnumber");
 //                            日期
-                            date=object.getString("date");
-                            Log.i("ticketonResponse",id+" "+price);
+                            date = object.getString("date");
+                            Log.i("ticketonResponse", id + " " + price);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(context, "返回正确" + s, Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(context, PayMoneyActivity.class);
+//                        Toast.makeText(context, "返回正确" + s, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, PayMoneyActivity.class);
                         //支付的时候需要id和username,所以这里传递一个id过去
-                        intent.putExtra("id",id);
-                        intent.putExtra("position",position);
-                        intent.putExtra("price",price);
-                        intent.putExtra("seatnumber",seatnumber);
-                        intent.putExtra("utype",utype);
-                        intent.putExtra("gnumber",gnumber);
-                        intent.putExtra("date",date);
+                        intent.putExtra("id", id);
+                        intent.putExtra("position", position);
+                        intent.putExtra("price", price);
+                        intent.putExtra("seatnumber", seatnumber);
+                        intent.putExtra("utype", utype);
+                        intent.putExtra("gnumber", gnumber);
+                        intent.putExtra("date", date);
                         context.startActivity(intent);
                     }
                 },
@@ -270,7 +279,7 @@ public class TicketListAdapter extends BaseAdapter {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("ticket", json());
+                map.put("ticket", json(position));
                 return map;
             }
         };
@@ -278,9 +287,9 @@ public class TicketListAdapter extends BaseAdapter {
         App.getRequestQueue(context).add(request);
     }
 
-    public String json() {
+    public String json(int position) {
         JSONObject data = new JSONObject();
-        Ticket ticket = App.mTicketList.get(0);
+        Ticket ticket = App.mTicketList.get(position);
         try {
             data.put("username", App.getUserName(context));
             data.put("date", ticket.getmDate());
@@ -319,7 +328,7 @@ class ViewHolder {
     @Bind(R.id.tvEndTime)
     TextView tvEndTime;
 
-    public ViewHolder(View view){
-        ButterKnife.bind(this,view);
+    public ViewHolder(View view) {
+        ButterKnife.bind(this, view);
     }
 }

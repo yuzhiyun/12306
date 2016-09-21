@@ -46,7 +46,7 @@ public class InforActivity extends BaseActivity {
     @Bind(R.id.tvPassengerType)
     TextView tvPassengerType;
 
-    String url = "http://" + App.ip + ":8080/getUserInfo.user";
+    String url = "http://" + App.ip + "/getUserInfo.user";
 
     @Override
     protected void setLayoutView() {
@@ -93,7 +93,7 @@ public class InforActivity extends BaseActivity {
                     public void onResponse(String s) {
                         progressDialog.dismiss();
 
-                        Toast.makeText(InforActivity.this, "服务器"+s, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(InforActivity.this, "服务器"+s, Toast.LENGTH_SHORT).show();
 //                        try {
 //                            String result = new JSONObject(s).getString("flag");
 //                            if ("success".equals(result)) {

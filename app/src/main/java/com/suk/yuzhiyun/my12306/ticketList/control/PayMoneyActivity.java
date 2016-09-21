@@ -66,7 +66,7 @@ public class PayMoneyActivity extends BaseActivity {
     TextView tvDate;
 
 
-    String url = "http://" + App.ip + ":8080/pay.ticket";
+    String url = "http://" + App.ip + "/pay.ticket";
 
     @Bind(R.id.btnPay)
     Button btnPay;

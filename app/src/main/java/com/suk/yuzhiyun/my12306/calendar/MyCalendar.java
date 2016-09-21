@@ -20,37 +20,69 @@ import com.suk.yuzhiyun.my12306.calendar.CalendarConfig.CalendarState;
  */
 public class MyCalendar extends View {
 
-	/** 屏幕宽度 */
+	/**
+	 * 屏幕宽度
+	 * */
 	private int width;
-	/** 屏幕高度 */
+	/**
+	 * 屏幕高度
+	 * */
 	private int height;
-	/** 日历数组 */
+	/**
+	 * 日历数组
+	 * */
 	private int[][] dateNum;
-	/** 日历日期状态数组 */
+	/**
+	 * 日历日期状态数组
+	 * */
 	private CalendarState[][] calendarStates;
-	/** 年 */
+	/**
+	 * 年
+	 * */
 	private int year;
-	/** 月 */
+	/**
+	 * 月
+	 * */
 	private int month;
-	/** 绘画类 */
+	/**
+	 *  绘画类
+	 *  */
 	private DrawCalendar drawCalendar;
-	/** 日历表格宽度 */
+	/**
+	 * 日历表格宽度
+	 * */
 	private float dateNumWidth;
-	/** 记录触发滑动的最小距离 */
+	/**
+	 * 记录触发滑动的最小距离
+	 * */
 	private int touchSlop;
-	/** 点击的X轴坐标 */
+	/**
+	 * 点击的X轴坐标
+	 * */
 	private float touchX;
-	/** 点击的Y轴坐标 */
+	/**
+	 * 点击的Y轴坐标
+	 * */
 	private float touchY;
-	/** 日历日期点击监听 */
+	/**
+	 * 日历日期点击监听
+	 * */
 	private OnCalendarClickListener onCalendarClickListener;
-	/** 日历字体大小 */
+	/**
+	 * 日历字体大小
+	 * */
 	private int fontSize = 25;
-	/** 本月字体颜色 */
+	/**
+	 * 本月字体颜色
+	 * */
 	private int currentMonthFontColor = Color.BLACK;
-	/** 非本月字体颜色 */
+	/**
+	 * 非本月字体颜色
+	 * */
 	private int noCurrentMonthFontColor = Color.GRAY;
-	/** 今天字体颜色 */
+	/**
+	 * 今天字体颜色
+	 * */
 	private int todayFontColor = Color.WHITE;
 
 	public MyCalendar(Context context) {
@@ -107,8 +139,7 @@ public class MyCalendar extends View {
 	 *
 	 * @param onCalendarClickListener
 	 */
-	public void setOnCalendarClickListener(
-			OnCalendarClickListener onCalendarClickListener) {
+	public void setOnCalendarClickListener(OnCalendarClickListener onCalendarClickListener) {
 		this.onCalendarClickListener = onCalendarClickListener;
 	}
 

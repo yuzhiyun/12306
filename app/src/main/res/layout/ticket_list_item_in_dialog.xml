@@ -356,13 +356,13 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:text="取  消"
-            android:textColor="@android:color/white" />
+        <!--<Button-->
+            <!--android:id="@+id/btnCancel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:text="取  消"-->
+            <!--android:textColor="@android:color/white" />-->
 
         <Button
             android:id="@+id/btnOk"

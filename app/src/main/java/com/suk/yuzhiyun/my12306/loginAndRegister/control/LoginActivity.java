@@ -49,7 +49,7 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.imgCode)
     ImageView imgCode;
 
-    String url = "http://" + App.ip + ":8080/login.user";
+    String url = "http://" + App.ip + "/login.user";
 
     @Override
     protected void setLayoutView() {
@@ -138,10 +138,12 @@ public class LoginActivity extends BaseActivity {
      * 登录成功的时候在本地存储用户名密码
      */
     private void saveInSharedPreference() {
-        //                      第一步，获得SharedPreferences对象，第一个参数指定存储数据的文件名称。第二个参数代表模式，一般默认Activity.MODE_PRIVATE
-        SharedPreferences SPsavaData = context.getSharedPreferences("user", Activity.MODE_PRIVATE);
-//                      第二步，获得editor对象
-        SharedPreferences.Editor editor = SPsavaData.edit();
+//        //                      第一步，获得SharedPreferences对象，第一个参数指定存储数据的文件名称。第二个参数代表模式，一般默认Activity.MODE_PRIVATE
+//        SharedPreferences SPsavaData = context.getSharedPreferences("user", Activity.MODE_PRIVATE);
+
+        SharedPreferences SPsaveData=App.getInstance().getSharedPreferences(context);
+        //                      第二步，获得editor对象
+        SharedPreferences.Editor editor = SPsaveData.edit();
 //                      第三步，存储数据
         editor.putString("username", etUserName.getText().toString().trim());
         editor.putString("password", etUserPwd.getText().toString().trim());

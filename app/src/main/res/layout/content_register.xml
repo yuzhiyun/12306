@@ -30,6 +30,7 @@
         android:layout_height="200dp"/>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -39,6 +40,18 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@android:color/white"
         android:text="注册"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/activity_horizontal_margin" />
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/linear"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@android:color/white"
+        android:text="下一步"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/activity_horizontal_margin" />
 

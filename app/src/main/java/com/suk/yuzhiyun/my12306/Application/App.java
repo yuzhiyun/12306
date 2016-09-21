@@ -18,6 +18,21 @@ import java.util.List;
  */
 public class App extends Application {
 
+    public static SharedPreferences SPsavaData;
+
+    public static App instance=null;
+    public static  App getInstance(){
+        if(instance==null)
+            instance=new App();
+        return  instance;
+    }
+
+
+    public  SharedPreferences getSharedPreferences(Context context){
+        if(SPsavaData==null)
+            SPsavaData=context.getSharedPreferences("user", Activity.MODE_PRIVATE);
+        return SPsavaData;
+    }
     public static List<Ticket> mTicketList=new ArrayList<Ticket>();
     /**
      * 已支付订单
@@ -36,7 +51,7 @@ public class App extends Application {
             "二等座"
     };
     public static String[] city=new String[]{"长沙","上海","北京","广州","杭州"};
-    public static String ip = "192.168.191.1";
+    public static String ip = "maxiaolong.cn/my12306";
     public static String type[] = {
             "成人",
             "儿童",
@@ -46,8 +61,8 @@ public class App extends Application {
     };
 
     public static String sex[] = {
-            "女",
-            "男"
+            "男",
+            "女"
     };
 
     //谔谔
@@ -59,7 +74,6 @@ public class App extends Application {
         super.onCreate();
 //        app=new App();
     }
-
 
     public static RequestQueue getRequestQueue(Context context) {
         if (requestQueue == null)
@@ -82,6 +96,5 @@ public class App extends Application {
         String password = SPgetData.getString("password", "");
         return password;
     }
-
 
 }
