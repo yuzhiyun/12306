@@ -109,10 +109,10 @@ public class InforActivity extends BaseActivity {
                         try {
 
                             JSONObject msg=new JSONObject(s).getJSONObject("getUserInfo");
-
                             tvRealName.setText(msg.getString("name"));
                             tvSex.setText(App.sex[Integer.parseInt(msg.getString("sex"))]);
-                            tvID.setText(msg.getString("idnumber"));
+//                            tvID.setText(msg.getString("idnumber"));
+                            tvID.setText("**********");
                             tvPhone.setText(msg.getString("tel"));
                             tvPassengerType.setText(App.type[Integer.parseInt(msg.getString("type"))]);
                         } catch (JSONException e) {

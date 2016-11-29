@@ -18,8 +18,8 @@ public class LoginRegisterActivity extends BaseActivity {
     @Bind(R.id.btnRegister)
     Button btnRegister;
 
-    @Bind(R.id.image)
-    ImageView image;
+//    @Bind(R.id.image)
+//    ImageView image;
 
     @Override
     protected void setLayoutView() {
@@ -39,8 +39,8 @@ public class LoginRegisterActivity extends BaseActivity {
     public void  register(){
         startActivity(new Intent(context,RegisterActivity.class));
     }
-    @OnClick(R.id.image)
-    public void  image(){
-        startActivity(new Intent(context,MainActivity.class));
-    }
+//    @OnClick(R.id.image)
+//    public void  image(){
+//        startActivity(new Intent(context,MainActivity.class));
+//    }
 }

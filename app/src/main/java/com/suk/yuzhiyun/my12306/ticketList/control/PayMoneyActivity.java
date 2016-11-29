@@ -177,8 +177,6 @@ public class PayMoneyActivity extends BaseActivity {
                                                 p.start();
                                                 imgRocket.setVisibility(View.VISIBLE);
                                                 imgRocket.startAnimation(AnimationUtils.loadAnimation(context, R.anim.translate));
-
-
                                                 handler.sendEmptyMessageDelayed(1, 900);
                                             }
                                         });
@@ -189,8 +187,6 @@ public class PayMoneyActivity extends BaseActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {

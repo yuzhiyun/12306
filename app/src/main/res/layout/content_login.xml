@@ -13,74 +13,63 @@
     tools:showIn="@layout/activity_login">
 
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/welcome_logo" />
+    android:id="@+id/image"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="64dp"
+    android:background="@drawable/welcome_logo" />
 
-    <!--<android.support.v7.widget.CardView-->
-        <!--android:id="@+id/cardView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@+id/image"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:clickable="true"-->
-        <!--android:foreground="?android:attr/selectableItemBackground"-->
-        <!--card_view:cardCornerRadius="7dp">-->
+
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/linear"
+        android:layout_marginTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+
+        android:orientation="vertical">
+
+
+
+
+        <android.support.v7.widget.AppCompatEditText
+
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/edittext"
+            android:gravity="center_vertical"
+            android:hint="用户名"
+            android:text="" />
 
         <LinearLayout
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/linear"
-            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray">
 
-            android:orientation="vertical">
-
-
-
-
-                <android.support.v7.widget.AppCompatEditText
-
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:id="@+id/etUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/edittext"
-                    android:gravity="center_vertical"
-                    android:hint="用户名"
-                    android:text="maxiaolong" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray">
-
-            </LinearLayout>
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/etUserPwd"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_below="@+id/etUserName"
-                    android:background="@drawable/edittext"
-                    android:hint="密码"
-                    android:text="123456" />
+        </LinearLayout>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/etUserPwd"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@+id/etUserName"
+            android:background="@drawable/edittext"
+            android:hint="密码"
+            android:text="" />
 
 
 
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/etCode"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -91,15 +80,15 @@
                 android:background="@drawable/edittext"
                 android:hint="验证码"
                 />
-                <ImageView
-                    android:id="@+id/imgCode"
-                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                    android:background="@drawable/edittext"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"  />
-            </LinearLayout>
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imgCode"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:background="@drawable/edittext"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"  />
+        </LinearLayout>
+    </LinearLayout>
     <!--</android.support.v7.widget.CardView>-->
 
     <Button
@@ -118,7 +107,6 @@
     <TextView
         android:id="@+id/tvSeverMsg"
         android:layout_width="match_parent"
-
         android:layout_height="50dp"
         android:layout_below="@+id/btnLogin"
         android:layout_marginTop="100dp"

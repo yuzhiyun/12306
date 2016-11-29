@@ -308,7 +308,9 @@ public class RegisterActivity extends BaseActivity {
     public Boolean verifyIDNumber(String id) {
         // 身份证验证规则
         String regEx = "^(\\d{6})(18|19|20)?(\\d{2})([01]\\d)([0123]\\d)(\\d{3})(\\d|X|x)?$";
-        return verify(regEx, id);
+//        return verify(regEx, id);
+//        由于源码公开，因为他人注册时不喜欢泄漏真正的身份证，所以我去掉了这里的身份证号正则表达式验证，也就是直接返回true
+        return true;
     }
 
     /**
